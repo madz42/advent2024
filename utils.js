@@ -79,4 +79,34 @@ const createPriorityQueue = (priority) => {
   };
 };
 
-module.exports = { readInputFile, splitByLine, splitByEmptyLine, findLCM, createCache, createPriorityQueue };
+// == Helpers ==
+
+// Array Incrementer
+const incrementArray = (arr, base) => {
+  const n = arr.length;
+  let carry = 1;
+
+  for (let i = n - 1; i >= 0; i--) {
+    const sum = arr[i] + carry;
+    arr[i] = sum % base;
+    carry = Math.floor(sum / base);
+    if (carry === 0) {
+      break;
+    }
+  }
+  if (carry === 1) {
+    arr.unshift(1);
+  }
+
+  return arr;
+};
+
+module.exports = {
+  readInputFile,
+  splitByLine,
+  splitByEmptyLine,
+  findLCM,
+  createCache,
+  createPriorityQueue,
+  incrementArray,
+};
