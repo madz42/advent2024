@@ -58,6 +58,18 @@ const createCache = () => {
   };
 };
 
+// Cached Function Helper
+const cachedFunction = (func) => {
+  const cache = new Map();
+  return (...args) => {
+    const key = JSON.stringify(args);
+    if (!cache.has(key)) {
+      cache.set(key, func(...args));
+    }
+    return cache.get(key);
+  };
+};
+
 // Priority Queue Helper
 const createPriorityQueue = (priority) => {
   //priority 'lo' or 'hi' = sorting asc or desc
@@ -107,6 +119,7 @@ module.exports = {
   splitByEmptyLine,
   findLCM,
   createCache,
+  cachedFunction,
   createPriorityQueue,
   incrementArray,
 };
